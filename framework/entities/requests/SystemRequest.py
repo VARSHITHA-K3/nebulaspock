@@ -2,16 +2,16 @@ from datetime import datetime
 
 class SystemRequestModel:
     id:int = None
-    isProcessed:bool = None
+    isprocessed:bool = None
     requestor:str = None
-    requestType:str = None
+    requesttype:str = None
     #requestStatus:requeststatus = None
     requestjson:str = None
-    requestedDate:str = datetime.now()
-    requestComments:str = None
-    entityId:int = None
-    entityType:str = None
-    createonDate:str = datetime.now()
+    requesteddate:str = datetime.now()
+    requestcomments:str = None
+    entityid:int = None
+    entitytype:str = None
+    createondate:str = datetime.now()
     modifyondate:str = datetime.now()
     objectid:int = None
     requestactions:str = None
@@ -19,3 +19,5 @@ class SystemRequestModel:
     originalrequest:bool = None
     forcebroadcast:bool = None
     updatecount:int = None
+
+    auditTrails:list = AuditTrailsModel()
