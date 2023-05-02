@@ -6,7 +6,6 @@ import forecasting.models.predictionmodel as  predictionmodel
 app = FastAPI()
 
 
-
                                                                                                 
 
 @app.get("/")
