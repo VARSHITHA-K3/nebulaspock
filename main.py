@@ -1,8 +1,14 @@
+import random
 from fastapi import FastAPI,Request
 from anomalies.algorithms.rule import init
 import forecasting.alogrithims.rule as ruleBase
-import json
 import forecasting.models.predictionmodel as  predictionmodel
+import json
+from framework.interfaces.consumer.NebulaConsumer import NebulaConsumer
+from framework.interfaces.producer.NebulaProducer import NebulaProducer
+import time
+from framework.services.kafka.consumer.NebulaKafkaConsumer import NebulaKafkaConsumer
+from framework.services.kafka.producer.NebulaKafkaProducer import NebulaKafkaProducer
 app = FastAPI()
 
 
@@ -41,17 +47,27 @@ async def anomolies(req:Request):
     else:
         return {"status": "success", "message": "No anomalies detected"}
     
-if __name__ == "__main__":
-    detect(file_path="C:/FastAPI/EventDate1.csv")
-    dataModel = predictionmodel.DataModel()
-    dataModel.logValue = int(input("Enter Log value: "))
-    dataModel.iterations = int(input("Enter Iterations value: "))
-    dataModel.movingAvgValue = int(input("Enter Moving Avg value: "))
-    dataModel.seasonalPeriod =  int(input("Enter Seasonal Period value: "))
-    dataModel.year =  int(input("Enter Year value: "))
-    dataModel.month =  int(input("Enter Month value: "))
-    dataModel.day =  int(input("Enter Day value: "))
-    start_date = input("Enter start date (in the format 'YYYY-MM-DD'): ")
-    end_date = input("Enter end date (in the format 'YYYY-MM-DD'): ")
-    file_path = input("Enter Data File Path: ")
-    ruleBase.predict_val(dataModel,file_path,start_date,end_date)
+
+@app.post('/send')
+async def producer(req:Request):
+    req_info = await req.json()
+    topic_name = req_info["topic_name"]
+    json_object = req_info["payload"]
+    messager_type = req_info["messager_type"]
+    producer:NebulaProducer = None
+    if(messager_type =="kafka"):
+        producer = NebulaKafkaProducer('localhost:9092')
+
+    producer.sendMessage(topic_name,json_object)
+    return json_object
+
+
+@app.get('/receive')
+async def consumer(req:Request):
+    req_info = await req.json()
+    topic_name = req_info["topic_name"]
+    consumer:NebulaConsumer = NebulaKafkaConsumer('localhost:9092')
+    print("NebulaConsumer Topic Name=%s"%(topic_name))
+    message = consumer.consumeMessage(topic_name)
+    time_to_sleep = random.randint(1, 11)
+    time.sleep(time_to_sleep)
