@@ -10,6 +10,7 @@ from nltk.stem import WordNetLemmatizer
 from tensorflow.keras import Sequential
 from tensorflow.keras.layers import Dense, Dropout
 
+
 logger = logging.getLogger(__name__)
 
 intents_file = open('data.corpus.json', 'rb').read()
