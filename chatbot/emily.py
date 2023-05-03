@@ -2,7 +2,6 @@ import json
 import logging
 import random
 import string
-
 import nltk
 import numpy as np
 import tensorflow as tf
@@ -79,7 +78,7 @@ model.add(Dropout(0.5))
 model.add(Dense(64, activation="relu"))
 model.add(Dropout(0.3))
 model.add(Dense(output_shape, activation="softmax"))
-adam = tf.keras.optimizers.Adam(learning_rate=0.01, decay=1e-6)
+adam = tf.keras.optimizers.Adam(learning_rate=0.01)
 model.compile(loss='categorical_crossentropy',
               optimizer=adam,
               metrics=["accuracy"])
@@ -122,6 +121,7 @@ def get_response(intents_list, intents_json):
     list_of_intents = intents_json["intents"]
     response = {}
     for i in list_of_intents:
+        print(i["tag"])
         if i["tag"] == tag:
             response["response"] = random.choice(i["responses"])
             response["query"] = i["query"]
@@ -154,7 +154,7 @@ def get_phrases(filtered, data):
     data["corpus"] = results
 
 
-def return_response(message):
+def return_chat_response(message):
     filtered = pred_class(message, words, classes)
     result = get_response(filtered["intents"], data)
     get_phrases(filtered, result)
@@ -164,6 +164,5 @@ def return_response(message):
 #   # running the chatbot
 # while True:
 #     message = input("")
-#     intents = pred_class(message, words, classes)
-#     result = get_response(intents, data)
+#     result = return_chat_response(message)
 #     print(result)
