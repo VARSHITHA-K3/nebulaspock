@@ -1,9 +1,8 @@
 from EntityProperties import EntityProperties
+from SystemRequest import SystemRequest
 from Entities import Entities
 
 class RequestPayload:
-    systemRequests:list = SystemRequest()
+    systemRequests: SystemRequest()
     properties:list = EntityProperties()
     entities: list = Entities()
-
-print(properties.isidentifier)
