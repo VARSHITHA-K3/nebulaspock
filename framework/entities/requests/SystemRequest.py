@@ -1,11 +1,11 @@
 from datetime import datetime
 
-class SystemRequestModel:
+class SystemRequest:
     id:int = None
     isprocessed:bool = None
     requestor:str = None
     requesttype:str = None
-    #requestStatus:requeststatus = None
+    requestStatus:requeststatus()
     requestjson:str = None
     requesteddate:str = datetime.now()
     requestcomments:str = None
@@ -15,7 +15,7 @@ class SystemRequestModel:
     modifyondate:str = datetime.now()
     objectid:int = None
     requestactions:str = None
-    #requestoperation:requestoperation = None
+    requestoperation:requestoperation()
     originalrequest:bool = None
     forcebroadcast:bool = None
     updatecount:int = None
