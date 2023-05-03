@@ -25,5 +25,8 @@ class SystemRequest:
     forcebroadcast:bool = None
     updatecount:int = None
     system:ApplicationSystems()
-    originsystem:ApplicationSystems
+    originsystem:ApplicationSystems()
     auditTrails:list = AuditTrails()
+
+    
+
