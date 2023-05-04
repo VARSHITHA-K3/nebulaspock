@@ -9,6 +9,8 @@ from framework.interfaces.producer.NebulaProducer import NebulaProducer
 import time
 from framework.services.kafka.consumer.NebulaKafkaConsumer import NebulaKafkaConsumer
 from framework.services.kafka.producer.NebulaKafkaProducer import NebulaKafkaProducer
+import redis
+import framework.services.redis.publisher.pub as publish
 app = FastAPI()
 
 
