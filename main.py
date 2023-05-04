@@ -10,10 +10,10 @@ from framework.interfaces.producer.NebulaProducer import NebulaProducer
 import time
 from framework.services.kafka.consumer.NebulaKafkaConsumer import NebulaKafkaConsumer
 from framework.services.kafka.producer.NebulaKafkaProducer import NebulaKafkaProducer
-import redis
+
 from framework.services.rabbitMQ.consumer.NebulaRabbitMQConsumer import NebulaRabbitMQConsumer
 from framework.services.rabbitMQ.producer.NebulaRabbitMQProducer import NebulaRabbitMQProducer
-import framework.services.redis.publisher.pub as publish
+from framework.services.redis.producer.NebulaRedisProducer import NebulaRedisProducer
 app = FastAPI()
 
 
@@ -64,7 +64,8 @@ async def producer(req:Request):
         producer = NebulaKafkaProducer('localhost:9092')
     elif(messager_type == "rabbitmq"):
         producer =  NebulaRabbitMQProducer("localhost","5672","user","Nebula=2020","nebula.exchange","nebula.vhost")
-        
+    elif(messager_type =="redis"):
+        producer = NebulaRedisProducer("localhost","6379")
 
     producer.sendMessage(topic_name,json_object)
     return json_object
