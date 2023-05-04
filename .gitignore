@@ -3,3 +3,9 @@ framework/services/kafka/producer/__pycache__
 forecasting/alogrithims/__pycache__/rule.cpython-310.pyc
 forecasting/alogrithims/__pycache__/__init__.cpython-310.pyc
 anomalies/algorithms/__pycache__/rule.cpython-310.pyc
+__pycache__/main.cpython-310.pyc
+chatbot/__pycache__/emily.cpython-310.pyc
+forecasting/__pycache__/__init__.cpython-310.pyc
+forecasting/models/__pycache__/predictionmodel.cpython-310.pyc
+framework/interfaces/consumer/__pycache__/NebulaConsumer.cpython-310.pyc
+framework/interfaces/producer/__pycache__/NebulaProducer.cpython-310.pyc
