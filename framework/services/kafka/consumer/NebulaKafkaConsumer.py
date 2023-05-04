@@ -7,8 +7,8 @@ class NebulaKafkaConsumer(NebulaConsumer):
     def __init__(self, servers):
         self.servers = servers
 
-    def consumeMessage(self, topic):
+    def consumeMessage(self, topic,messageCallBack):
         consumer = KafkaConsumer(topic,bootstrap_servers=self.servers,auto_offset_reset='earliest')
         for message in consumer:
-            print(json.loads(message.value))
+            messageCallBack(None,None,None,message)
 

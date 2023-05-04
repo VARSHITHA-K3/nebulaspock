@@ -18,3 +18,4 @@ framework/interfaces/producer/__pycache__/NebulaProducer.cpython-310.pyc
 /framework/services/rabbitMQ/utilities/__pycache__
 /framework/services/redis/utilities/__pycache__
 /framework/services/redis/producer/__pycache__
+/framework/services/redis/consumer/__pycache__

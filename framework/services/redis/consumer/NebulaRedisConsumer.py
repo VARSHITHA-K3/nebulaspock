@@ -8,7 +8,7 @@ class NebulaRedisConsumer(NebulaConsumer):
     def __init__(self, servers: str, port: str):
         self.redisCommon = NebulaRedisCommon(servers=servers, port=port)
 
-    def consumeMessage(self, topic):
+    def consumeMessage(self, topic,messageCallBack):
         last_id = 0
         sleep_ms = 5000
         while True:
@@ -19,8 +19,8 @@ class NebulaRedisConsumer(NebulaConsumer):
                 if resp:
                     key, messages = resp[0]
                     last_id, data = messages[0]
-                    print("REDIS ID: ", last_id)
-                    print("      --> ", data)
+                    messageCallBack(None,None,None,data)
+                    
 
             except ConnectionError as e:
                 print("ERROR REDIS CONNECTION: {}".format(e))

@@ -9,14 +9,13 @@ class NebulaRabbitMQConsumer(NebulaConsumer):
         self.rabbitMQCommon: NebulaRabbitMQCommon = NebulaRabbitMQCommon(
             servers=servers, userName=username, password=password, port=port, vhost=vhost)
 
-     def callback(self, ch, method, properties, body):
-        print("Received message: ", json.loads(body))
+     
 
-     def consumeMessage(self, topic):
+     def consumeMessage(self, topic,messageCallBack):
          channel = self.rabbitMQCommon.createExchange(exchangeName=self.exchangeName)
          self.rabbitMQCommon.createQueue(queueName=topic, routingKey="*."+topic+".*",
                                         exchangeName=self.exchangeName)
-         channel.basic_consume(queue=topic, on_message_callback=self.callback, auto_ack=True)
+         channel.basic_consume(queue=topic, on_message_callback=messageCallBack, auto_ack=True)
          channel.start_consuming()
 
 
