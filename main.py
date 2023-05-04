@@ -1,4 +1,5 @@
 import random
+from chatbot.emily import return_chat_response
 from fastapi import FastAPI,Request
 from anomalies.algorithms.rule import init
 import forecasting.alogrithims.rule as ruleBase
@@ -73,3 +74,7 @@ async def consumer(req:Request):
     message = consumer.consumeMessage(topic_name)
     time_to_sleep = random.randint(1, 11)
     time.sleep(time_to_sleep)
+
+@app.get("/chatbot/{question}")
+async def chatbot(question):
+  return return_chat_response(question)

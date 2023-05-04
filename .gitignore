@@ -1,0 +1,5 @@
+framework/services/kafka/consumer/__pycache__
+framework/services/kafka/producer/__pycache__
+forecasting/alogrithims/__pycache__/rule.cpython-310.pyc
+forecasting/alogrithims/__pycache__/__init__.cpython-310.pyc
+anomalies/algorithms/__pycache__/rule.cpython-310.pyc
