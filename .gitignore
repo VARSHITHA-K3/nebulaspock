@@ -13,3 +13,6 @@ framework/interfaces/producer/__pycache__/NebulaProducer.cpython-310.pyc
 /anomalies/algorithms/__pycache__
 /chatbot/__pycache__
 /forecasting/__pycache__
+/framework/services/rabbitMQ/consumer/__pycache__
+/framework/services/rabbitMQ/producer/__pycache__
+/framework/services/rabbitMQ/utilities/__pycache__

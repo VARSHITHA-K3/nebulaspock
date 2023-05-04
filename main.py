@@ -11,6 +11,8 @@ import time
 from framework.services.kafka.consumer.NebulaKafkaConsumer import NebulaKafkaConsumer
 from framework.services.kafka.producer.NebulaKafkaProducer import NebulaKafkaProducer
 import redis
+from framework.services.rabbitMQ.consumer.NebulaRabbitMQConsumer import NebulaRabbitMQConsumer
+from framework.services.rabbitMQ.producer.NebulaRabbitMQProducer import NebulaRabbitMQProducer
 import framework.services.redis.publisher.pub as publish
 app = FastAPI()
 
@@ -60,16 +62,27 @@ async def producer(req:Request):
     producer:NebulaProducer = None
     if(messager_type =="kafka"):
         producer = NebulaKafkaProducer('localhost:9092')
+    elif(messager_type == "rabbitmq"):
+        producer =  NebulaRabbitMQProducer("localhost","5672","user","Nebula=2020","nebula.exchange","nebula.vhost")
+        
 
     producer.sendMessage(topic_name,json_object)
     return json_object
 
 
-@app.get('/receive')
-async def consumer(req:Request):
+
+
+
+@app.get('/receive/{type}')
+async def consumer(req:Request,type):
     req_info = await req.json()
     topic_name = req_info["topic_name"]
-    consumer:NebulaConsumer = NebulaKafkaConsumer('localhost:9092')
+    consumer:NebulaConsumer = None
+    if(type == "kafka"):
+        consumer = NebulaKafkaConsumer('localhost:9092')
+    elif (type =="rabbitmq"):
+        consumer = NebulaRabbitMQConsumer("localhost","5672","user","Nebula=2020","nebula.exchange","nebula.vhost")
+
     print("NebulaConsumer Topic Name=%s"%(topic_name))
     message = consumer.consumeMessage(topic_name)
     time_to_sleep = random.randint(1, 11)
@@ -78,3 +91,5 @@ async def consumer(req:Request):
 @app.get("/chatbot/{question}")
 async def chatbot(question):
   return return_chat_response(question)
+
+
