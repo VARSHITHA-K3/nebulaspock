@@ -1,0 +1,170 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": [
+        "Hello",
+        "How are you?",
+        "Hi there",
+        "Hi",
+        "Whats up"
+      ],
+      "responses": [
+        "Howdy Partner!",
+        "Hello",
+        "How are you doing?",
+        "Greetings!",
+        "How do you do?"
+      ],
+      "query": "",
+      "phrases": [],
+      "entities": [],
+      "parameters": []
+    },
+    {
+      "tag": "meeting",
+      "patterns": [
+        "When is my next meeting?",
+        "Whats my meetings look like?",
+        "What are my out standing meetings?"
+      ],
+      "responses": [
+        "Your meetings look like",
+        "Your next meetings are",
+        "These are your outstanding meetings!",
+        "The next meetings are!"
+      ],
+      "query": "SELECT * FROM MEETINGS WHERE HOSTID=:loggedid",
+      "phrases": [],
+      "entities": [
+        "MEETINGS"
+      ],
+      "parameters": []
+    },
+    {
+      "tag": "termination",
+      "patterns": [
+        "Terminate id?",
+        "Terminate employee?",
+        "Terminate employeeid?",
+        "Terminate person?",
+        "Terminate personid?",
+        "Terminate identity?",
+        "Terminate identityid?",
+        "Terminate contractor?",
+        "Terminate contractorid?",
+        "Urgent terminate employee?",
+        "Urgent terminate contractor?",
+        "Urgent terminate identity?",
+        "Urgent terminate person?"
+      ],
+      "responses": [
+        "Identity is terminated",
+        "Person is terminated",
+        "Identity termination is processed",
+        "Person termination is processed"
+      ],
+      "query": "UPDATE PERSONS SET STATUS = 'Terminated' WHERE EMPLOYEEID =:employeeId",
+      "phrases": [
+        "employee",
+        "person",
+        "identity",
+        "contractor",
+        "ID",
+        "employeeid",
+        "personid",
+        "contractorid",
+        "identityid"
+      ],
+      "entities": [
+        "PERSONS"
+      ],
+      "parameters": [
+        {
+          "employeeId": "employee,person,identity,contractor,ID,employeeid,personid,contractorid,identityid"
+        }
+      ]
+    },
+    {
+      "tag": "email",
+      "patterns": [
+        "What's email address of employee?",
+        "What's email address of contractor?",
+        "What's email address of person?",
+        "What's email address of identity?",
+        "Email address of person?",
+        "Email address of identity?",
+        "Email address of employee?",
+        "Email address of contractor?"
+      ],
+      "responses": [
+        "Email address of Identity",
+        "Email address of person",
+        "Email address is !"
+      ],
+      "query": "SELECT EMAIL FROM PERSONS WHERE EMPLOYEEID =:employeeId",
+      "phrases": [],
+      "entities": [
+        "PERSONS"
+      ],
+      "parameters": [
+        {
+          "employeeId": "employee,person,identity,contractor,ID,employeeid,personid,contractorid,identityid"
+        }
+      ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": [
+        "bye",
+        "g2g",
+        "see ya",
+        "adios",
+        "cya"
+      ],
+      "responses": [
+        "It was nice speaking to you",
+        "See you later",
+        "Speak soon!"
+      ],
+      "query": "",
+      "phrases": [],
+      "entities": [],
+      "parameters": []
+    },
+    {
+      "tag": "name",
+      "patterns": [
+        "what's your name?",
+        "what are you called?",
+        "who are you?"
+      ],
+      "responses": [
+        "My name is Emily",
+        "I'm Emily",
+        "Emily"
+      ],
+      "query": "",
+      "phrases": [],
+      "entities": [],
+      "parameters": []
+    },
+    {
+      "tag": "nocontext",
+      "patterns": [
+        "Empty context",
+        "Incomplete context",
+        "No context"
+      ],
+      "responses": [
+        "Inadequate context please retry",
+        "Incomplete context please provide more details",
+        "Context is not well defined please retry"
+      ],
+      "query": "",
+      "phrases": [],
+      "entities": [],
+      "parameters": []
+    }
+  ]
+}
