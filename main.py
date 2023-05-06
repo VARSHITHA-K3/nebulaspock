@@ -14,6 +14,7 @@ from framework.services.kafka.producer.NebulaKafkaProducer import NebulaKafkaPro
 from framework.services.rabbitMQ.consumer.NebulaRabbitMQConsumer import NebulaRabbitMQConsumer
 from framework.services.rabbitMQ.producer.NebulaRabbitMQProducer import NebulaRabbitMQProducer
 from framework.services.redis.producer.NebulaRedisProducer import NebulaRedisProducer
+from framework.services.redis.consumer.NebulaRedisConsumer import NebulaRedisConsumer
 app = FastAPI()
 
 
@@ -83,7 +84,7 @@ async def consumer(req:Request,type):
         consumer = NebulaKafkaConsumer('localhost:9092')
     elif (type =="rabbitmq"):
         consumer = NebulaRabbitMQConsumer("localhost","5672","user","Nebula=2020","nebula.exchange","nebula.vhost")
-
+    
     print("NebulaConsumer Topic Name=%s"%(topic_name))
     message = consumer.consumeMessage(topic_name)
     time_to_sleep = random.randint(1, 11)
